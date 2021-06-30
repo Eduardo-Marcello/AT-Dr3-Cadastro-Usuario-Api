@@ -19,8 +19,7 @@ public class ProdutoService {
 	        this.pr = pr;
 	    }
 		
-		public Produto registra(int codigoProduto, String nomeProduto, String classificacao) {
-			Produto produto = new Produto(codigoProduto, nomeProduto, classificacao);
+		public Produto registra(Produto produto) {
 			return this.pr.save(produto);
 		}
 		
@@ -29,14 +28,18 @@ public class ProdutoService {
 		}
 		
 		public List<Produto> findListagem(){
+			return pr.findAll();
+		}
+		
+		public List<Produto> findCotacoes(){
 			return pr.findCotacoes();
 		}
 		
-		public Short findIdByKeyword(String keyword) {
+		public Integer findIdByKeyword(String keyword) {
 			return pr.search(keyword).getIdProduto();
 		}
 		
-		public void excluir(Short id) {
+		public void excluir(Integer id) {
 			this.pr.deleteById(id);
 		}
 		

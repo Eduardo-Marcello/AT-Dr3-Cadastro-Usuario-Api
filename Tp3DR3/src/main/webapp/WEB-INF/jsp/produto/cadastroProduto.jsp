@@ -13,17 +13,17 @@
 	</div>
 
 	<div class="container">
-		<form action="/cadastrar" method="post">
+		<form action="/registraProduto" method="post">
 
 			<div class="form-group">
 				<label>Código:</label> <input type="number" class="form-control"
-					name="codigoProduto" " id="codigoProduto" required="">
+					name="codigoProduto" id="codigoProduto" required="">
 			</div>
 
 
 			<div class="form-group">
 				<label>Nome:</label> <input type="text" class="form-control"
-					name="nomePrdouto" id="nomeProduto" required="">
+					name="nomeProduto" id="nomeProduto" required="">
 			</div>
 
 			<div class="form-group">

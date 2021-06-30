@@ -44,7 +44,7 @@ function validar(){
 			</div>
 
 			<div id="formFooter">
-				<a class="underlineHover" href="cadastro.jsp">Não possui
+				<a class="underlineHover" href="usuario/cadastro">Não possui
 					cadastro?</a>
 			</div>
 		</div>

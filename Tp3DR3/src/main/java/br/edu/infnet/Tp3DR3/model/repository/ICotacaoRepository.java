@@ -7,6 +7,6 @@ import br.edu.infnet.Tp3DR3.model.negocio.Cotacao;
 
 
 @Repository
-public interface ICotacaoRepository extends JpaRepository<Cotacao, Short> {
+public interface ICotacaoRepository extends JpaRepository<Cotacao, Integer> {
 	
 }

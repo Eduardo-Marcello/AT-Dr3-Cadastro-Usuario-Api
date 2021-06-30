@@ -1,12 +1,11 @@
 package br.edu.infnet.Tp3DR3.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.infnet.Tp3DR3.model.negocio.Cotacao;
 import br.edu.infnet.Tp3DR3.model.negocio.Produto;
@@ -14,7 +13,7 @@ import br.edu.infnet.Tp3DR3.service.CotacaoService;
 import br.edu.infnet.Tp3DR3.service.ProdutoService;
 
 
-@RestController
+@Controller
 public class CotacaoController {
 	
 	@Autowired
@@ -22,6 +21,7 @@ public class CotacaoController {
 	
 	@Autowired
 	private ProdutoService produtoService;
+	
 	Produto produto = new Produto();
 
 	@Autowired
@@ -29,20 +29,33 @@ public class CotacaoController {
 		this.cotacaoService = cotacaoService;
 	}
 	
-	@PostMapping("/registraCotacao")
-	Cotacao registra(Double preco, String keyword) {
-		return cotacaoService.registra(preco, produto);
+	@GetMapping(value = "/cotacao/cadastroCotacao")
+	public String telaCadastro(Model model) {
+		Cotacao cotacao = new Cotacao();
+		
+		 model.addAttribute("cotacao", cotacao);
+		 model.addAttribute("produtos", produtoService.findListagem());
+		return "cotacao/cadastroCotacao";
 	}
 	
-	@PostMapping("/ListCotacoes")
-	public List<Cotacao> findList(String keyword) {
-//		List<Cotacao> c = cotacaoService.findCotacoes(keyword);
-//		System.out.println(c);
-		return cotacaoService.findCotacoes(keyword);
+	@PostMapping(value = "/registraCotacao")
+	public String registra(Cotacao cotacao, Produto produto) {
+		
+		cotacaoService.registra(cotacao, produto);
+		return "redirect:/cotacao/lista";
 	}
 	
-	@DeleteMapping(value = "/deletaCotacao/{id}")
-	public void excluir(@PathVariable Short id) {
-		cotacaoService.excluir(id);	
+	@GetMapping(value = "/cotacao/lista")
+	public String listagem(Model model) {
+		
+		model.addAttribute("cotacoes", cotacaoService.findListagem());
+		return "cotacao/lista";
+	}
+	
+	@GetMapping(value = "/cotacao/{id}/excluir")
+	public String excluir(@PathVariable Integer id, Model model) {
+		
+		cotacaoService.excluir(id);
+		return "redirect:/cotacao/lista";
 	}
 }

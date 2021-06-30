@@ -20,14 +20,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "produtos")
 @NamedQueries({
-	@NamedQuery(name = "Produto.findCotacoes", query = "SELECT p FROM Produto p JOIN FETCH p.cotacoesLista"),
+	@NamedQuery(name = "Produto.findCotacoes", query = "SELECT p FROM Produto p JOIN FETCH p.cotacoes"),
 })
 public class Produto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_produto")
-	private Short idProduto;
+	private Integer idProduto;
 	@Column(name = "codigo_produto")
 	private int codigoProduto;
 	@Column(name = "nome_produto")
@@ -36,10 +36,10 @@ public class Produto implements Serializable {
 	private String classificacao;
 	
 	@OneToMany(mappedBy = "produto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<Cotacao> cotacoesLista;
+	private Set<Cotacao> cotacoes;
 
-	public Set<Cotacao> getEmails() {
-		return cotacoesLista;
+	public Set<Cotacao> getCotacao() {
+		return cotacoes;
 	}
 
 	public Produto() {
@@ -52,11 +52,11 @@ public class Produto implements Serializable {
 		this.classificacao = classificacao;
 	}
 
-	public Short getIdProduto() {
+	public Integer getIdProduto() {
 		return idProduto;
 	}
 
-	public void setIdProduto(Short id) {
+	public void setIdProduto(Integer id) {
 		this.idProduto = id;
 	}
 
@@ -82,6 +82,14 @@ public class Produto implements Serializable {
 
 	public void setClassificacao(String classificacao) {
 		this.classificacao = classificacao;
+	}
+
+	public Set<Cotacao> getCotacoes() {
+		return cotacoes;
+	}
+
+	public void setCotacoes(Set<Cotacao> cotacoes) {
+		this.cotacoes = cotacoes;
 	}
 
 	@Override

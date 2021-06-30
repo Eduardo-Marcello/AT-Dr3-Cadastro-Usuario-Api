@@ -12,31 +12,32 @@
 </head>
 <body>
 	<div class="container">
-		<c:if test="${not empty cotacoes}">
+		<c:if test="${not empty produtos}">
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>Id</th>
-						<th>Preço</th>
-						<th>Id produto</th>
+						<th>Codigo</th>
+						<th>Nome</th>
+						<th>Classificação</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="c" items="${cotacoes}">
+					<c:forEach var="p" items="${produtos}">
 						<tr>
-							<td>${c.id}</td>
-							<td>${c.preco}</td>
-							<td>${c.produto.idProduto}</td>
-							<td><a href="/cotacao/${c.id}/excluir">excluir</a></td>
+							<td>${p.idProduto}</td>
+							<td>${p.codigoProduto}</td>
+							<td>${p.nomeProduto}</td>
+							<td>${p.classificacao}</td>
+							<td><a href="/produto/excluir?id=${p.idProduto}">Excluir</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</c:if>
-		<c:if test="${empty cotacoes}">
-			<h3>Nenhuma cotação foi cadastrado!</h3>
+		<c:if test="${empty produtos}">
+			<h3>Nenhum produto foi cadastrado!</h3>
 		</c:if>
 	</div>
-
 </body>
 </html>

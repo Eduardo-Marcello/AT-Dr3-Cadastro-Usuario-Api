@@ -1,7 +1,9 @@
 package br.edu.infnet.Tp3DR3.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,16 +20,24 @@ public class CotacaoService {
 	@Autowired
 	ProdutoService ps;
 	
+	
 	public CotacaoService(ICotacaoRepository cr) {
         this.cr = cr;
     }
 	
-	public Cotacao registra(Double preco, Produto produto) {
-		Cotacao cotacao = new Cotacao(preco, produto);
-		return this.cr.save(cotacao);
+	public void registra(Cotacao cotacao, Produto produto) {
+		
+		Set<Cotacao> cotacoes = new HashSet<>();
+		cotacoes.add(cotacao);
+		produto.setCotacoes(cotacoes);
+		this.cr.save(cotacao);
 	}
 	
-	public void excluir(Short id) {
+	public List<Cotacao> findListagem(){
+		return cr.findAll();
+	}
+	
+	public void excluir(Integer id) {
 		this.cr.deleteById(id);
 	}
 

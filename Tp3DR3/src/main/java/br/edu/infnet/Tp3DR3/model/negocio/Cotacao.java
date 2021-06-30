@@ -22,7 +22,7 @@ public class Cotacao implements Serializable {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 @Column(name = "id_cotacao")
-	 private Short id;
+	 private Integer id;
 	 private double preco;
 	 
 	 @JsonIgnore
@@ -39,11 +39,11 @@ public class Cotacao implements Serializable {
 		this.produto = produto;
 	}
 
-	public Short getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Short id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
