@@ -5,9 +5,13 @@ import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.edu.infnet.Tp3DR3.model.negocio.Login;
+import br.edu.infnet.Tp3DR3.model.negocio.Produto;
 import br.edu.infnet.Tp3DR3.model.negocio.Usuario;
 import br.edu.infnet.Tp3DR3.service.UsuarioService;
 
@@ -31,6 +35,13 @@ public class AppController {
         return "redirect:/confirmacao";
     }
     
+    @GetMapping(value = "/usuario/lista")
+	public String listagem(Model model) {
+		
+		model.addAttribute("usuarios", usuarioService.listarUsuarios());
+		return "usuario/lista";
+	}
+    
     @RequestMapping(value = "/confirmacao")
     public String confirmacao(Model model) {
     	model.addAttribute("usuario", usuarioService.consultarCadastro());
@@ -44,24 +55,12 @@ public class AppController {
     	return "login";
     }
     
-    @RequestMapping(value = "/validacao")
-    public String validacao(Model model, Login login)throws SQLException {
-    	usuarioService.salvarLogin(login);
-    	return "redirect:/valida";
-    }
-    
-    @RequestMapping(value = "/valida")
-    public String valida(Model model) {
-    	String msg;
-    	if(usuarioService.acharCadastro()==true) {
-    			msg = "Você está autenticado no sistema!";
-    		} else {
-    			msg = "Dados incorretos ou inexistentes!";
-    		}
-
-    	model.addAttribute("msg", msg);
-        return "valida";
-    }
+    @GetMapping(value = "usuario/excluir")
+	public String excluir(@RequestParam Integer id, Model model) {
+		
+		usuarioService.excluir(id);
+		return "redirect:/usuario/lista";
+	}
 
     
 }

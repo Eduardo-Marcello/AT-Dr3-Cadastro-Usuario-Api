@@ -6,8 +6,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="<c:url value='recursos/style.css'/>" rel="stylesheet"/>
 <title>Listagem</title>
 </head>
 <body>
@@ -29,7 +29,8 @@
 							<td>${p.codigoProduto}</td>
 							<td>${p.nomeProduto}</td>
 							<td>${p.classificacao}</td>
-							<td><a href="/produto/excluir?id=${p.idProduto}">Excluir</a></td>
+							<td><a href="/produto/alterar?id=${p.idProduto}">Alterar</a>
+						&nbsp;&nbsp;<a href="/produto/excluir?id=${p.idProduto}">Excluir</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

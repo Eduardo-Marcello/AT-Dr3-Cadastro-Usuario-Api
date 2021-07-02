@@ -1,6 +1,7 @@
 package br.edu.infnet.Tp3DR3.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,11 @@ public class ProdutoService {
 		
 		public List<Produto> findCotacoes(){
 			return pr.findCotacoes();
+		}
+		
+		public Produto findById(Integer id) {
+			
+			return pr.findById(id).get();
 		}
 		
 		public Integer findIdByKeyword(String keyword) {

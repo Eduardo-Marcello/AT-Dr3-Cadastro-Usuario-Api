@@ -30,6 +30,11 @@ public class UsuarioService {
 		this.login = login;
 	}
 	
+	public List<Usuario> listarUsuarios() {
+		
+		return (List<Usuario>) usuarioRepository.findAll();
+	}
+	
 	public Usuario consultarCadastro() {
 		return usuario;
 	}
